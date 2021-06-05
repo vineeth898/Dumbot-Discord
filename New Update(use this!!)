@@ -664,21 +664,23 @@ async def on_message(message):
 
     else:
         global question
-        if message.author.name != "DumbBot":
+        if message.author.name != "DumBot":
             chat = bot.get_channel(849514953579692032)
-            if (question == ""):
-                answer = algorithm.AI(message.content)
-                if (answer != "takesecondinput"):
-                    await chat.send(answer)
+            if(question==""):
+                answer=algorithm.AI(message.content)
+                if(answer=="takesecondinput"):
+                    question=message.content
+                    await chat.send("Im not cleverbot or a human, I have limited database, tell me the answer this time, ill answer it the next time you ask")
+                elif(answer=="sendmeme"):
+                    fIle=["meme/einstine.jpeg","meme/elon.jpeg","meme/meme1.png","meme/meme2.png"]
+                    await chat.send(file=discord.File(fIle[random.randint(0,len(fIle)-1)]))
                 else:
-                    question = message.content
-                    await chat.send(
-                        "Im not cleverbot or a human, I have limited database, tell me the answer this time, ill answer it the next time you ask")
+                    await chat.send(answer)
             else:
-                algorithm.smart(question, message.content)
+                algorithm.smart(question,message.content)
                 await chat.send("ok, ask again")
-                question = ""
+                question=""
         else:
             pass
 
-bot.run("TOKEN")
+bot.run("ODQ1NTgwNjM2OTc4MTUxNDQ0.YKjCVQ.z3us079RweXXH1pRubecrf7NNb8")
